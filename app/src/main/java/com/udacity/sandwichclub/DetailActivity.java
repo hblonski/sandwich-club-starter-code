@@ -3,7 +3,9 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -43,7 +45,7 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        populateUI();
+        populateUI(sandwich);
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
@@ -56,7 +58,10 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
-
+    private void populateUI(Sandwich sandwich) {
+        ((TextView) findViewById(R.id.origin_tv)).setText(sandwich.getPlaceOfOrigin());
+        ((TextView) findViewById(R.id.description_tv)).setText(sandwich.getDescription());
+        ((TextView) findViewById(R.id.ingredients_tv)).setText(TextUtils.join(", ", sandwich.getIngredients()));
+        ((TextView) findViewById(R.id.also_known_tv)).setText(TextUtils.join(", ", sandwich.getAlsoKnownAs()));
     }
 }
